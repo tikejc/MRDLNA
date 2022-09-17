@@ -69,12 +69,12 @@
     if (![_udpSocket bindToPort:ssdpPort error:&error]){
         [self onError:error];
     }
-    
+
     if (![_udpSocket beginReceiving:&error])
     {
         [self onError:error];
     }
-    
+
     if (![_udpSocket joinMulticastGroup:ssdpAddres error:&error])
     {
         [self onError:error];
@@ -95,7 +95,7 @@
     self.receiveDevice = YES;
     [self onChange];
     CGFloat versionNum = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if (versionNum < 16) { // iOS16以上不能执行如下代码，辅助不能查询到小米电视TV设置
+    if (versionNum < 16) { // iOS16以上不能执行如下代码，否则不能搜索到小米电视TV设置
         NSData * sendData = [[self getSearchString] dataUsingEncoding:NSUTF8StringEncoding];
         [_udpSocket sendData:sendData toHost:ssdpAddres port:ssdpPort withTimeout:-1 tag:1];
     }
@@ -230,26 +230,26 @@ withFilterContext:(nullable id)filterContext{
 - (NSString *)headerValueForKey:(NSString *)key inData:(NSString *)data
 {
     NSString *str = [NSString stringWithFormat:@"%@", data];
-    
+
     NSRange keyRange = [str rangeOfString:key options:NSCaseInsensitiveSearch];
-    
+
     if (keyRange.location == NSNotFound){
         return @"";
     }
-    
+
     str = [str substringFromIndex:keyRange.location + keyRange.length];
-    
+
     NSRange enterRange = [str rangeOfString:@"\r\n"];
-    
+
     NSString *value = [[str substringToIndex:enterRange.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
+
     return value;
 }
 
 - (CLUPnPDevice *)getDeviceWithLocation:(NSString *)location withUSN:(NSString *)usn
 {
     dispatch_semaphore_t seamphore = dispatch_semaphore_create(0);
-    
+
     __block CLUPnPDevice *device = nil;
     NSURL *URL = [NSURL URLWithString:location];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
@@ -267,7 +267,7 @@ withFilterContext:(nullable id)filterContext{
                     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
                     GDataXMLElement *xmlEle = [xmlDoc rootElement];
                     NSArray *xmlArray = [xmlEle children];
-                    
+
                     for (int i = 0; i < [xmlArray count]; i++) {
                         GDataXMLElement *element = [xmlArray objectAtIndex:i];
                         if ([[element name] isEqualToString:@"device"]) {
