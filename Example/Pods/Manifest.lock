@@ -1,0 +1,26 @@
+PODS:
+  - CocoaAsyncSocket (7.6.3)
+  - MRDLNA (10.0.2):
+    - CocoaAsyncSocket
+    - MRDLNA/MRC (= 10.0.2)
+  - MRDLNA/MRC (10.0.2):
+    - CocoaAsyncSocket
+
+DEPENDENCIES:
+  - MRDLNA (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaAsyncSocket
+
+EXTERNAL SOURCES:
+  MRDLNA:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  MRDLNA: 14a33296b0c1367fc22b1af31a10d6349f1aa0c7
+
+PODFILE CHECKSUM: bb69de52cb74a8e723cd916e3106c142b2fd14d3
+
+COCOAPODS: 1.10.0
