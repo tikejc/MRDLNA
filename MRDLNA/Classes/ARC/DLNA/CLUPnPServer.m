@@ -95,7 +95,7 @@
     self.receiveDevice = YES;
     [self onChange];
     CGFloat versionNum = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if (versionNum < 16) {
+    if (versionNum < 16) { // iOS16以上不能执行如下代码，辅助不能查询到小米电视TV设置
         NSData * sendData = [[self getSearchString] dataUsingEncoding:NSUTF8StringEncoding];
         [_udpSocket sendData:sendData toHost:ssdpAddres port:ssdpPort withTimeout:-1 tag:1];
     }
